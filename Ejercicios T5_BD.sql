@@ -172,3 +172,32 @@ FROM empleados
 WHERE salarioEmpleado > (SELECT MAX(salarioEmpleado) FROM empleados 
 WHERE idDepartamentofk = 122)
 ORDER BY 1;
+
+-- Ejercicio 3.3.2 --
+
+SELECT nombreEmpleado AS 'Empleado' FROM empleados 
+WHERE salarioEmpleado
+> 3.5 * (SELECT MIN(salarioEmpleado) FROM empleados WHERE idDepartamentoFK = 122)
+ORDER BY 1;
+
+-- Ejercicio 3.3.3 --
+
+SELECT nombreEmpleado AS 'Empleado', salarioEmpleado  AS 'Salario' 
+FROM empleados
+WHERE salarioEmpleado = ANY(SELECT comisionEmpleado FROM empleados) ORDER BY 1;
+
+-- Ejercicio 3.3.4 --
+
+SELECT nombreEmpleado AS 'Empleado', 
+salarioEmpleado  AS 'Salario' 
+FROM empleados 
+WHERE salarioEmpleado <
+ANY (SELECT MAX(comisionEmpleado) FROM empleados) ORDER BY 1;
+
+-- Ejercicio 3.3.5 --
+
+SELECT nombreEmpleado AS 'Empleado', 
+salarioEmpleado  AS 'Salario' 
+FROM empleados 
+WHERE salarioEmpleado < 4 * 
+(SELECT MAX(comisionEmpleado) FROM empleados);
